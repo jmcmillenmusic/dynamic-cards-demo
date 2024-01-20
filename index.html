@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deck of Cards Demo</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <main>
+        <h1>Deck of Cards Demo</h1>
+        <button id="shuffle" onclick="shuffle()">Shuffle</button>
+        <button id="draw" onclick="draw()" disabled>Draw</button>
+        <p>Choose a card to discard:</p>
+        <form>
+            <label for="dropdown">Cards in hand:</label>
+            <select name="cardsInHand" id="dropdown"></select>
+        </form>
+        <button id="discard" onclick="discard()">Discard</button>
+        <p id="alert">No more cards to draw!</p>
+        <p id="alert2">No more cards to discard!</p>
+        <h2>Your Hand:</h2>
+        <div id="cardsInHand"></div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
