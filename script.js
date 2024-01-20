@@ -35,35 +35,38 @@ function draw() {
         deck.shift(deck[0]);
         // Creates images, appends them to the cardsInHand section, and sets their sources
         var handDiv = document.getElementById('cardsInHand');
+        var cardContainer = document.createElement('div');
+        cardContainer.setAttribute("class", "fullcard");
+        handDiv.appendChild(cardContainer);
         var cardImg = document.createElement('img');
-        handDiv.appendChild(cardImg);
-        // var handDiv = document.getElementById('cardsInHand');
-        // var cardContainer = document.createElement('div');
-        // handDiv.appendChild(cardContainer);
-        // var cardImg = document.createElement('img');
-        // cardImg.src = './cardPhotos/blank_card.png';
-        // var cardText = document.createElement('h3');
-        // cardContainer.appendChild(cardImg);
-        // handDiv.appendChild(cardImg);
-        // handDiv.appendChild(cardText);
-        // for (i = 0; i < hand.length; i++) {
-        //     var card = hand[i];
-        //     cardImg.id = `${card.Value} of ${card.Suit}`;
-        //     switch (true) {
-        //         case (card.Suit === "clubs"):
-        //             cardText.textContent = `${card.Value} \u2663`;
-        //             break;
-        //         case (card.Suit === "diamonds"):
-        //             cardText.textContent = `${card.Value} \u2666`;
-        //             break;
-        //         case (card.Suit === "hearts"):
-        //             cardText.textContent = `${card.Value} \u2665`;
-        //             break;
-        //         case (card.Suit === "spades"):
-        //             cardText.textContent = `${card.Value} \u2660`;
-        //             break;
-        //     }
-        // }
+        cardImg.setAttribute("class", "cardImg");
+        cardImg.src = 'images/blank_card.png';
+        cardContainer.appendChild(cardImg);
+        var cardText = document.createElement('h3');
+        cardText.setAttribute("class", "cardText");
+        cardContainer.appendChild(cardText);
+        for (i = 0; i < hand.length; i++) {
+            var card = hand[i];
+            cardImg.id = `${card.Value} of ${card.Suit}`;
+            switch (true) {
+                case (card.Suit === "clubs"):
+                    cardText.textContent = `${card.Value}\u2663`;
+                    cardText.style.color = "black";
+                    break;
+                case (card.Suit === "diamonds"):
+                    cardText.textContent = `${card.Value}\u2666`;
+                    cardText.style.color = "red";
+                    break;
+                case (card.Suit === "hearts"):
+                    cardText.textContent = `${card.Value}\u2665`;
+                    cardText.style.color = "red";
+                    break;
+                case (card.Suit === "spades"):
+                    cardText.textContent = `${card.Value}\u2660`;
+                    cardText.style.color = "black";
+                    break;
+            }
+        }
         for (i = 0; i < hand.length; i++) {
             var card = hand[i];
             cardImg.id = `${card.Value} of ${card.Suit}`
