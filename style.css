@@ -35,3 +35,23 @@ p, label {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.fullcard {
+    display: flex;
+    position: relative;
+    width: 200px;
+    height: 280px;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.cardImg, .cardText {
+    position: absolute;
+    width: 100%;
+    /* height: auto; */
+}
+
+.cardText {
+    font-size: 96px;
+    text-align: center;
+}
