@@ -1,0 +1,57 @@
+body {
+    background-color: #568f56;
+}
+
+main {
+    font-family: monospace;
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    text-align: center;
+    background-color: #90EE90;
+    border-style: solid;
+	border-color: black;
+    border-radius: 10px;
+	border-width: 3px;
+}
+
+p, label {
+    color: white;
+}
+
+#alert {
+    visibility: hidden;
+}
+
+#alert2 {
+    visibility: hidden;
+}
+
+#cardsInHand {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.fullcard {
+    display: flex;
+    position: relative;
+    width: 200px;
+    height: 280px;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.cardImg, .cardText {
+    position: absolute;
+    width: 100%;
+    /* height: auto; */
+}
+
+.cardText {
+    font-size: 96px;
+    text-align: center;
+}
