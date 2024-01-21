@@ -91,34 +91,20 @@ function draw() {
 function discard() {
     if (hand.length >= 1) {
         // Removes the image of the selected cards in the dropdown menu
-        // var handDiv = document.getElementById('cardsInHand');
-        // console.log(handDiv.children);
+        var handDiv = document.getElementById('cardsInHand');
         var cardIds = [...document.querySelectorAll('.fullcard')].map(({ id }) => id);
-        // console.log(cardIds);
         var options = [...document.querySelectorAll('option')].map(({ value }) => value);
-        // console.log(options);
         var discardingCard = list.selectedIndex;
-        // console.log(discardingCard);
-        // var dropImg = document.getElementById(document.images[list.selectedIndex].id);
-        // console.log(cardContainer);
-        // var chosenCard = document.querySelector(hand[list.selectedIndex]);
-        // console.log(chosenCard);
-        // var card = document.querySelector('.fullcard');
+        var card = document.querySelectorAll('.fullcard');
         for (i = 0; i < cardIds.length; i++) {
             if (cardIds[i] === options[discardingCard]) {
-                // card.parentNode.removeChild(card);
-                // console.log(true);
-                // handDiv[i].removeChild(handDiv[i]);
-            } else {
-                // console.log(false);
+                handDiv.removeChild(card[i]);
             }
         }
-        // dropImg.parentNode.removeChild(dropImg);
-        // handDiv.parentNode.removeChild(dropImg);
         // Adds the chosen card to the discard pile and removes it from your hand
-        // discardPile.unshift(hand[list.selectedIndex]);
-        // hand.splice(list.selectedIndex, 1);
-        // list.remove(list.selectedIndex);
+        discardPile.unshift(hand[list.selectedIndex]);
+        hand.splice(list.selectedIndex, 1);
+        list.remove(list.selectedIndex);
     } else {
         document.getElementById("alert2").style.visibility = "visible";
     }
