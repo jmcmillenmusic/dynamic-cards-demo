@@ -10,7 +10,10 @@ const values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
 // References the dropdown menu listing all cards in your hand
 const list = document.getElementById("dropdown");
 
-// Creates and shuffles the deck using the Fisher-Yates Algorithm and prints to the console
+// References the section containing all of your cards
+const handDiv = document.getElementById('cardsInHand');
+
+// Creates and shuffles the deck using the Fisher-Yates Algorithm
 function shuffle() {
     // Deck creation
     for (let i = 0; i < suits.length; i++) {
@@ -24,6 +27,7 @@ function shuffle() {
       let j = Math.floor(Math.random() * (i + 1));
       [deck[i], deck[j]] = [deck[j], deck[i]];
     }
+    // Prevents you from drawing before you shuffle or shuffling after you draw
     document.getElementById("shuffle").disabled = true;
     document.getElementById("draw").disabled = false;
 }
@@ -33,21 +37,23 @@ function draw() {
     if (deck.length >= 1) {
         hand.push(deck[0]);
         deck.shift(deck[0]);
-        // Creates images, appends them to the cardsInHand section, and sets their sources
-        var handDiv = document.getElementById('cardsInHand');
+        // Creates a container div with the fullcard class under handDiv
         var cardContainer = document.createElement('div');
         cardContainer.setAttribute("class", "fullcard");
         handDiv.appendChild(cardContainer);
+        // Creates the card image with the cardImg class under cardContainer
         var cardImg = document.createElement('img');
         cardImg.setAttribute("class", "cardImg");
         cardImg.src = 'images/blank_card.png';
         cardContainer.appendChild(cardImg);
+        // Creates the card text with the cardText class under cardContainer
         var cardText = document.createElement('h3');
         cardText.setAttribute("class", "cardText");
         cardContainer.appendChild(cardText);
+        // Sets the card value, suit, and text color
         for (i = 0; i < hand.length; i++) {
             var card = hand[i];
-            cardImg.id = `${card.Value} of ${card.Suit}`;
+            cardContainer.id = `${card.Value} of ${card.Suit}`;
             switch (true) {
                 case (card.Suit === "clubs"):
                     cardText.textContent = `${card.Value}\u2663`;
@@ -67,11 +73,8 @@ function draw() {
                     break;
             }
         }
-        for (i = 0; i < hand.length; i++) {
-            var card = hand[i];
-            cardImg.id = `${card.Value} of ${card.Suit}`
-        }
     } else {
+        // Alerts you that there are no more cards to draw
         document.getElementById("alert").style.visibility = "visible";
     }
     // Clears all options from the dropdown menu
@@ -92,13 +95,22 @@ function draw() {
 function discard() {
     if (hand.length >= 1) {
         // Removes the image of the selected cards in the dropdown menu
-        var dropImg = document.getElementById(document.images[list.selectedIndex].id);
-        dropImg.parentNode.removeChild(dropImg);
+        var handDiv = document.getElementById('cardsInHand');
+        var cardIds = [...document.querySelectorAll('.fullcard')].map(({ id }) => id);
+        var options = [...document.querySelectorAll('option')].map(({ value }) => value);
+        var discardingCard = list.selectedIndex;
+        var card = document.querySelectorAll('.fullcard');
+        for (i = 0; i < cardIds.length; i++) {
+            if (cardIds[i] === options[discardingCard]) {
+                handDiv.removeChild(card[i]);
+            }
+        }
         // Adds the chosen card to the discard pile and removes it from your hand
         discardPile.unshift(hand[list.selectedIndex]);
         hand.splice(list.selectedIndex, 1);
         list.remove(list.selectedIndex);
     } else {
+        // Alerts you that there are no cards to discard
         document.getElementById("alert2").style.visibility = "visible";
     }
 }
