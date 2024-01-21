@@ -10,6 +10,9 @@ const values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
 // References the dropdown menu listing all cards in your hand
 const list = document.getElementById("dropdown");
 
+// References the section containing all of your cards
+const handDiv = document.getElementById('cardsInHand');
+
 // Creates and shuffles the deck using the Fisher-Yates Algorithm and prints to the console
 function shuffle() {
     // Deck creation
@@ -47,7 +50,7 @@ function draw() {
         cardContainer.appendChild(cardText);
         for (i = 0; i < hand.length; i++) {
             var card = hand[i];
-            cardImg.id = `${card.Value} of ${card.Suit}`;
+            cardContainer.id = `${card.Value} of ${card.Suit}`;
             switch (true) {
                 case (card.Suit === "clubs"):
                     cardText.textContent = `${card.Value}\u2663`;
@@ -66,10 +69,6 @@ function draw() {
                     cardText.style.color = "black";
                     break;
             }
-        }
-        for (i = 0; i < hand.length; i++) {
-            var card = hand[i];
-            cardImg.id = `${card.Value} of ${card.Suit}`
         }
     } else {
         document.getElementById("alert").style.visibility = "visible";
@@ -92,12 +91,34 @@ function draw() {
 function discard() {
     if (hand.length >= 1) {
         // Removes the image of the selected cards in the dropdown menu
-        var dropImg = document.getElementById(document.images[list.selectedIndex].id);
-        dropImg.parentNode.removeChild(dropImg);
+        // var handDiv = document.getElementById('cardsInHand');
+        // console.log(handDiv.children);
+        var cardIds = [...document.querySelectorAll('.fullcard')].map(({ id }) => id);
+        // console.log(cardIds);
+        var options = [...document.querySelectorAll('option')].map(({ value }) => value);
+        // console.log(options);
+        var discardingCard = list.selectedIndex;
+        // console.log(discardingCard);
+        // var dropImg = document.getElementById(document.images[list.selectedIndex].id);
+        // console.log(cardContainer);
+        // var chosenCard = document.querySelector(hand[list.selectedIndex]);
+        // console.log(chosenCard);
+        // var card = document.querySelector('.fullcard');
+        for (i = 0; i < cardIds.length; i++) {
+            if (cardIds[i] === options[discardingCard]) {
+                // card.parentNode.removeChild(card);
+                // console.log(true);
+                // handDiv[i].removeChild(handDiv[i]);
+            } else {
+                // console.log(false);
+            }
+        }
+        // dropImg.parentNode.removeChild(dropImg);
+        // handDiv.parentNode.removeChild(dropImg);
         // Adds the chosen card to the discard pile and removes it from your hand
-        discardPile.unshift(hand[list.selectedIndex]);
-        hand.splice(list.selectedIndex, 1);
-        list.remove(list.selectedIndex);
+        // discardPile.unshift(hand[list.selectedIndex]);
+        // hand.splice(list.selectedIndex, 1);
+        // list.remove(list.selectedIndex);
     } else {
         document.getElementById("alert2").style.visibility = "visible";
     }
